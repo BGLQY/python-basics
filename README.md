@@ -662,14 +662,49 @@ def a():
 a()()
 
 
+# 回调函数：
+# 自身就是一个函数，只是被传到了其它的函数供其调用
+
+def funa(func):
+    print(func(2))
+    print('回调函数的使用')
 
 
+funa(lambda a: a + 1)
 
+# 装饰器
+
+def a(b):
+    def c():
+        print("进入到c啦")
+        print(b("q"), "b函数被调用了")
+        print("这里是C哦")
+
+    return c
+
+
+a(lambda q: "b")()
+
+
+def f(b):
+    def g(k):
+        print(f"收到函数{k}")
+        print("进入到g啦")
+        print(b("q"), "b函数被调用了")
+        print("这里是g哦")
+
+    return g
+
+
+@f
+def h(q):  # 这里是 调用 形参的b函数 (业务增强代码) 
+    return "收到q"
+
+
+h(1)  # 这里是 是调用g
 ```
 
 
-
-# 四. 面向对象编程
 
 
 
